@@ -5,12 +5,13 @@ import {Store} from '@ngrx/store';
 
 import {User} from '../models/user.model';
 
+import {UserService} from '../services/user.service';
+
 import {
   RootStoreState,
   UserStoreActions,
   UserStoreSelectors
 } from '../root-store';
-import {UpdateUserAction} from '../root-store/user-store/actions';
 
 @Component({
   selector: 'app-user-list',
@@ -21,11 +22,17 @@ export class UserListComponent implements OnInit {
 
   users$: Observable<User[]>;
 
-  constructor(private store$: Store<RootStoreState.State>) {
+  usersTestFormService: User[];
+
+  constructor(private store$: Store<RootStoreState.State>, private userService: UserService) {
   }
 
   ngOnInit() {
     this.users$ = this.store$.select(UserStoreSelectors.selectAll);
+
+    this.userService.getUsers().subscribe(obj => {
+      this.usersTestFormService = obj;
+    });
   }
 
   appendTextToUserName(id, name, appendText) {

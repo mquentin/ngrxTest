@@ -4,7 +4,10 @@ import {User} from '../../models/user.model';
 export enum ActionTypes {
   ADD_USER = '[USER] add user',
   UPDATE_USER = '[USER] update user',
-  REMOVE_USER = '[USER] remove user'
+  REMOVE_USER = '[USER] remove user',
+  LOAD_USER = '[USER] load user',
+  LOAD_USER_SUCCESS = '[USER] load user success',
+  LOAD_USER_FAIL = '[USER] load user fail',
 }
 
 export class AddUserAction implements Action {
@@ -29,5 +32,28 @@ export class RemoveUserAction implements Action {
   }
 }
 
+export class LoadUserAction implements Action {
+  readonly type = ActionTypes.LOAD_USER;
 
-export type Actions = AddUserAction | UpdateUserAction | RemoveUserAction;
+  constructor() {
+  }
+}
+
+export class LoadUserSuccessAction implements Action {
+  readonly type = ActionTypes.LOAD_USER_SUCCESS;
+
+  constructor(public user: User) {
+  }
+}
+
+export class LoadUserFailAction implements Action {
+  readonly type = ActionTypes.LOAD_USER_FAIL;
+
+  constructor() {
+  }
+}
+
+
+//https://www.youtube.com/watch?v=xkUOQeGqIGI&list=PLW2eQOsUPlWJRfWGOi9gZdc3rE4Fke0Wv&index=11
+
+export type Actions = AddUserAction | UpdateUserAction | RemoveUserAction | LoadUserAction | LoadUserSuccessAction | LoadUserFailAction;
