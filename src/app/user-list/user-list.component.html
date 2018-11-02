@@ -1,0 +1,8 @@
+<div class="right" *ngIf="users$">
+  <h3>Users</h3>
+  <ul>
+    <li *ngFor="let user of users$ | async" (click)="delUser(user.id)">
+      {{ user.id }} - {{ user.name }} - {{ user.email }}
+    </li>
+  </ul>
+</div>
