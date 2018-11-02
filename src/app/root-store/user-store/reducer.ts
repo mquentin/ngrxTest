@@ -1,19 +1,17 @@
 import {Actions, ActionTypes} from './actions';
-import {initialState, State} from './state';
+import {initialState, userAdapter, State} from './state';
 
 export function userReducer(state = initialState, action: Actions): State {
   switch (action.type) {
     case ActionTypes.ADD_USER:
-      action.payload.id = Math.max.apply(Math, state.users.map(({ id }) => id)) + 1;
-      return {
-        ...state,
-        users: [...state.users, action.payload]
-      };
+      return userAdapter.addOne(action.user, state);
+    case ActionTypes.UPDATE_USER:
+      return userAdapter.updateOne({
+        id: action.id,
+        changes: action.changes,
+      }, state);
     case ActionTypes.REMOVE_USER:
-      return {
-        ...state,
-        users: state.users.filter(user => user.id !== action.payload)
-      };
+      return userAdapter.removeOne(action.id, state);
     default: {
       return state;
     }

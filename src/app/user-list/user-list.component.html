@@ -1,8 +1,14 @@
 <div class="right" *ngIf="users$">
   <h3>Users</h3>
   <ul>
-    <li *ngFor="let user of users$ | async" (click)="delUser(user.id)">
-      {{ user.id }} - {{ user.name }} - {{ user.email }}
+    <li *ngFor="let user of users$ | async">
+      <div class="left" (click)="delUser(user.id)">
+        {{ user.id }} - {{ user.name }} - {{ user.email }}
+      </div>
+      <div class="right">
+        <input type="text" placeholder="appendName" #appendName>
+        <button (click)="appendTextToUserName(user.id, user.name, appendName.value)">Append Text</button>
+      </div>
     </li>
   </ul>
 </div>

@@ -10,6 +10,7 @@ import {
   UserStoreActions,
   UserStoreSelectors
 } from '../root-store';
+import {UpdateUserAction} from '../root-store/user-store/actions';
 
 @Component({
   selector: 'app-user-list',
@@ -24,7 +25,12 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.users$ = this.store$.select(UserStoreSelectors.selectUserList);
+    this.users$ = this.store$.select(UserStoreSelectors.selectAll);
+  }
+
+  appendTextToUserName(id, name, appendText) {
+    const newName: string = name + appendText;
+    this.store$.dispatch(new UserStoreActions.UpdateUserAction(id, {name: newName}));
   }
 
   delUser(id) {

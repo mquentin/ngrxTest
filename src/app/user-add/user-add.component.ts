@@ -17,7 +17,8 @@ export class UserAddComponent implements OnInit {
   }
 
   addUser(name, email) {
-    this.store$.dispatch(new UserStoreActions.AddUserAction({id: null, name: name, email: email}));
+    const newDate: Date = new Date();
+    this.store$.dispatch(new UserStoreActions.AddUserAction({id: newDate.getTime(), name: name, email: email}));
   }
 
   ngOnInit() {
