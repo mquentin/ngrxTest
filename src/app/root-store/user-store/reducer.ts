@@ -1,7 +1,7 @@
 import {Actions, ActionTypes} from './actions';
 import {initialState, userAdapter, State} from './state';
 
-export function userReducer(state = initialState, action: Actions): State {
+export function UserReducer(state = initialState, action: Actions): State {
   switch (action.type) {
     case ActionTypes.ADD_USER:
       return userAdapter.addOne(action.user, state);

@@ -49,7 +49,7 @@ export class LoadUserSuccessAction implements Action {
 export class LoadUserFailAction implements Action {
   readonly type = ActionTypes.LOAD_USER_FAIL;
 
-  constructor() {
+  constructor(public error: String) {
   }
 }
 

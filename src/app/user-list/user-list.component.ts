@@ -28,6 +28,8 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store$.dispatch(new UserStoreActions.LoadUserAction());
+
     this.users$ = this.store$.select(UserStoreSelectors.selectAll);
 
     this.userService.getUsers().subscribe(obj => {
